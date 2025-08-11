@@ -1,5 +1,9 @@
 import { Edit, Eye, Trash2 } from 'lucide-react'
 import React from 'react'
+import EditMobile from './EditMobile'
+
+import Link from 'next/link'
+import DeleteUser from './DeleteUser'
 
 const TabelUsersMobile = ({users, getRoleColor}) => {
   return (
@@ -11,8 +15,8 @@ const TabelUsersMobile = ({users, getRoleColor}) => {
               <div className="h-12 w-12 rounded-full bg-gradient-to-r from-red-400 to-red-600 flex items-center justify-center text-white font-semibold">
                 {user.avatar}
               </div>
-              <div className="ml-4">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{user.name}</h3>
+              <div className="ml-2">
+                <h3 className="text-[12.5px] font-semibold text-gray-900 dark:text-white">{user.name}</h3>
                 <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full mt-1 ${getRoleColor(user.role)}`}>
                   {user.role}
                 </span>
@@ -20,14 +24,16 @@ const TabelUsersMobile = ({users, getRoleColor}) => {
             </div>
             
             <div className="flex items-center gap-2">
-              <button className="p-2 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-all duration-300">
+              <Link href={`/users/${user.id}`} className=" text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-all duration-300">
                 <Eye size={16} />
+              </Link>
+              <button className="  text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-lg transition-all duration-300">
+                {/* <Edit size={16} /> */}
+                <EditMobile user={user} />
               </button>
-              <button className="p-2 text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-lg transition-all duration-300">
-                <Edit size={16} />
-              </button>
-              <button className="p-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all duration-300">
-                <Trash2 size={16} />
+              <button className=" text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all duration-300">
+                {/* <Trash2 size={16} /> */}
+                <DeleteUser  user={user} />
               </button>
             </div>
           </div>

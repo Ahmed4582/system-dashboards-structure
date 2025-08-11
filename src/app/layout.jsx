@@ -31,7 +31,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "LENAAI",
+  title: "edue system",
   description: "LENAAI, your ai property consultant",
 };
 

@@ -4,6 +4,13 @@ import React, { useState, useMemo } from 'react';
 import { Search, Plus, Edit, Trash2, Eye, MoreVertical, Mail, Phone, User, Shield, Users, Crown, UserCheck, ChevronDown, ChevronUp } from 'lucide-react';
 import TabelUsersMobile from './TabelUsersMobile';
 
+
+
+import AddUser from './AddUser';
+import Link from 'next/link';
+import EditUser from './EditUser';
+import DeleteUser from './DeleteUser';
+
 const TabelUsers = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('name');
@@ -72,11 +79,8 @@ const TabelUsers = () => {
               {showStatsAndSearch ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
               <span>{showStatsAndSearch ? 'Hide Stats' : 'Show Stats'}</span>
             </button>
-            <button className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-red-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 font-medium">
-              <Plus size={18} />
-              <span className="hidden sm:inline">Add User</span>
-            </button>
-          
+            {/* Remove the wrapping button and just render AddUser directly */}
+            <AddUser/>
           </div>
         </div>
 
@@ -179,7 +183,7 @@ const TabelUsers = () => {
                     onChange={(e) => setSearchTerm(e.target.value)}
                   />
                 </div>
-                {searchTerm && (
+                {/* {searchTerm && (
                   <div className="flex items-center gap-2">
                     <span className="text-sm text-gray-600 dark:text-gray-400">
                       Found {filteredAndSortedUsers.length} user{filteredAndSortedUsers.length !== 1 ? 's' : ''}
@@ -191,7 +195,7 @@ const TabelUsers = () => {
                       Clear
                     </button>
                   </div>
-                )}
+                )} */}
               </div>
             </div>
           </div>
@@ -272,15 +276,13 @@ const TabelUsers = () => {
                     <td className="px-6 py-4 whitespace-nowrap  text-sm font-medium">
                       <div className="flex items-center justify-center gap-2">
 
-                        <button className="p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-all duration-300">
+                        <Link href={`/users/${user.id}`}  className="p-2 border border-red-500 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-all duration-300">
                           <Eye size={16} />
-                        </button>
-                        <button className="p-2 text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-lg transition-all duration-300">
-                          <Edit size={16} />
-                        </button>
-                        <button className="p-2 text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all duration-300">
-                          <Trash2 size={16} />
-                        </button>
+                        </Link>
+                        {/* Remove the wrapping button and just render EditUser directly */}
+                        <EditUser user={user} />
+                        {/* Remove the wrapping button and just render DeleteUser directly */}
+                        <DeleteUser user={user} onDelete={(u) => console.log("Deleting", u)} />
                       </div>
                     </td>
                   </tr>
@@ -308,6 +310,7 @@ const TabelUsers = () => {
           </div>
         </div>
       </div>
+     
     </div>
   );
 };

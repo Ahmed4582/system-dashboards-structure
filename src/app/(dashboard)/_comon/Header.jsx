@@ -3,6 +3,7 @@ import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useI18n } from "@/context/translate-api";
 import TestButton from "../../(interface)/_components/ToggelThem";
 import UserMenu from "./UserMenu";
+import { NotificationsMenu } from "./NotificationsMenu";
 
 const Header = ({ sidebarOpen, setSidebarOpen }) => {
   const { t, direction } = useI18n();
@@ -53,13 +54,14 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
           </button>
 
           {/* Notifications */}
-          <button 
+          {/* <button 
             className="p-1.5 sm:p-2 rounded-lg text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 relative"
             aria-label="Notifications"
           >
             <Bell className="w-4 h-4 sm:w-5 sm:h-5" />
-            <span className="absolute -top-0.5 -right-0.5 sm:-top-1 sm:-right-1 w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full border border-white dark:border-gray-800"></span>
-          </button>
+            <span className="absolute -top-1 right-1  w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full border border-white dark:border-gray-800"></span>
+          </button> */}
+          <NotificationsMenu />
 
           {/* Language Switcher - Hidden on extra small screens */}
           <div className=" xs:block">

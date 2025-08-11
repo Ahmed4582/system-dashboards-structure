@@ -4,6 +4,7 @@ import Header from "./Header";
 import Sidebar from "./SideBar";
 import { BookOpen, Clock, GraduationCap, DollarSign, CheckSquare, Calendar } from "lucide-react";
 import { useI18n } from "@/context/translate-api";
+import { PopupProvider } from "../_context/PopupContext";
 
 export default function DashboardClient({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -13,6 +14,7 @@ export default function DashboardClient({ children }) {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
       {/* Sidebar Component */}
+       <PopupProvider>
       <Sidebar 
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
@@ -30,9 +32,11 @@ export default function DashboardClient({ children }) {
           setSidebarOpen={setSidebarOpen}
         />
          {children}
+         
         {/* Dashboard Content */}
        
       </div>
+      </PopupProvider>
     </div>
   );
 }
