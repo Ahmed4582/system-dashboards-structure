@@ -128,14 +128,14 @@ const TabelUsers = () => {
                     <p className="text-sm font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wide">Administrators</p>
                     <p className="text-3xl font-bold text-gray-900 dark:text-white mt-2">{stats.admins || 0}</p>
                   </div>
-                  <div className="h-12 w-12 bg-gradient-to-r from-red-500 to-red-600 rounded-xl flex items-center justify-center">
+                  <div className="h-12 w-12 bg-gradient-to-r from-primary to-red-600 rounded-xl flex items-center justify-center">
                     <Crown className="text-white" size={24} />
                   </div>
                 </div>
                 <div className="mt-4">
                   <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                     <div 
-                      className="bg-gradient-to-r from-red-500 to-red-600 h-2 rounded-full transition-all duration-500"
+                      className="bg-gradient-to-r from-primary to-red-600 h-2 rounded-full transition-all duration-500"
                       style={{ width: `${(stats.admins / stats.total) * 100}%` }}
                     ></div>
                   </div>
@@ -178,7 +178,7 @@ const TabelUsers = () => {
                   <input
                     type="text"
                     placeholder="Search users by name, username, or email..."
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all duration-300"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all duration-300"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                   />
@@ -190,7 +190,7 @@ const TabelUsers = () => {
                     </span>
                     <button 
                       onClick={() => setSearchTerm('')}
-                      className="text-sm text-red-500 hover:text-red-700 transition-colors"
+                      className="text-sm text-primary hover:text-red-700 transition-colors"
                     >
                       Clear
                     </button>
@@ -211,36 +211,36 @@ const TabelUsers = () => {
                   <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                     <button
                       onClick={() => handleSort('name')}
-                      className="flex items-center gap-2 hover:text-red-500 transition-colors"
+                      className="flex items-center gap-2 hover:text-primary transition-colors"
                     >
                       <User size={16} />
                       User
                       {sortBy === 'name' && (
-                        <span className="text-red-500">{sortOrder === 'asc' ? '↑' : '↓'}</span>
+                        <span className="text-primary">{sortOrder === 'asc' ? '↑' : '↓'}</span>
                       )}
                     </button>
                   </th>
                   <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                     <button
                       onClick={() => handleSort('email')}
-                      className="flex items-center gap-2 hover:text-red-500 transition-colors"
+                      className="flex items-center gap-2 hover:text-primary transition-colors"
                     >
                       <Mail size={16} />
                       Contact
                       {sortBy === 'email' && (
-                        <span className="text-red-500">{sortOrder === 'asc' ? '↑' : '↓'}</span>
+                        <span className="text-primary">{sortOrder === 'asc' ? '↑' : '↓'}</span>
                       )}
                     </button>
                   </th>
                   <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                     <button
                       onClick={() => handleSort('role')}
-                      className="flex items-center gap-2 hover:text-red-500 transition-colors"
+                      className="flex items-center gap-2 hover:text-primary transition-colors"
                     >
                       <Shield size={16} />
                       Role
                       {sortBy === 'role' && (
-                        <span className="text-red-500">{sortOrder === 'asc' ? '↑' : '↓'}</span>
+                        <span className="text-primary">{sortOrder === 'asc' ? '↑' : '↓'}</span>
                       )}
                     </button>
                   </th>
@@ -255,7 +255,7 @@ const TabelUsers = () => {
                   <tr key={user.id} className={`hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors `}>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
-                        <div className="h-10 w-10 rounded-full bg-gradient-to-r from-red-400 to-red-600 flex items-center justify-center text-white font-semibold text-sm">
+                        <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-white font-semibold text-sm">
                           {user.avatar}
                         </div>
                         <div className="ml-4">
@@ -276,7 +276,7 @@ const TabelUsers = () => {
                     <td className="px-6 py-4 whitespace-nowrap  text-sm font-medium">
                       <div className="flex items-center justify-center gap-2">
 
-                        <Link href={`/users/${user.id}`}  className="p-2 border border-red-500 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-all duration-300">
+                        <Link href={`/users/${user.id}`}  className="p-2 border border-primary text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-all duration-300">
                           <Eye size={16} />
                         </Link>
                         {/* Remove the wrapping button and just render EditUser directly */}
@@ -303,7 +303,7 @@ const TabelUsers = () => {
             <button className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
               Previous
             </button>
-            <span className="px-3 py-1 bg-red-500 text-white rounded">1</span>
+            <span className="px-3 py-1 bg-primary text-white rounded">1</span>
             <button className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
               Next
             </button>

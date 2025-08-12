@@ -96,7 +96,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             {sidebarOpen && (
               <div className="transition-opacity duration-200 whitespace-nowrap flex-1 text-center">
                 <h1 className="text-lg font-bold text-gray-900 dark:text-white">
-                  منصة القرآن
+                   التاجر الرقمي
                 </h1>
               </div>
             )}
