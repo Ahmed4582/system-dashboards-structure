@@ -9,7 +9,7 @@ import { PopupProvider } from "../_context/PopupContext";
 export default function DashboardClient({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const { t, direction } = useI18n();
-  // إزالة السطر: const dir = t === "ar" ? "rtl" : "ltr";
+
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">

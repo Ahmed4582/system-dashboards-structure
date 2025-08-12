@@ -8,6 +8,7 @@ import {
   Clock,
   ChevronLeft,
   ChevronDown,
+  ChartBar,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -43,6 +44,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     },
     { icon: Gift, label: "التجارب المجانية", href: "/dashboard/lessons/2" },
     { icon: Clock, label: "أوقاتي", href: "/dashboard/lessons/2" },
+    { icon: ChartBar, label: "الإحصائيات", href: "/statistics" },
   ];
 
   const toggleSubmenu = (index) => {
