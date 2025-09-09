@@ -1,19 +1,29 @@
-"use client";
-import Link from "next/link";
-import { Settings } from "lucide-react";
+import { Settings } from 'lucide-react'
+import Link from 'next/link'
+import React from 'react'
 
-export default function SettingsButton({ sidebarOpen }) {
+const SettingsButton = ({sidebarOpen}) => {
+
   return (
-    <div className="p-3 border-t border-gray-200 dark:border-gray-700">
-      <Link
-        href="/settings"
-        className="flex items-center gap-2 w-full px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-      >
-        <Settings className="w-4 h-4" />
-        {sidebarOpen && <span>الإعدادات</span>}
-      </Link>
-    </div>
-  );
+    <div className="flex-shrink-0 border-t border-gray-200 dark:border-gray-700 p-3 overflow-hidden">
+          <Link href="/dashboard/settings">
+            <div className={`flex items-center gap-3 ${sidebarOpen ? 'px-4 py-3' : ''}  rounded-xl bg-gradient-to-r from-primary-gradient to-primary text-white  transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105`}>
+              <div className="w-10 h-10 bg-white/20   rounded-lg flex items-center justify-center backdrop-blur-sm">
+                <Settings className="w-5 h-5 " />
+              </div>
+              {sidebarOpen && (
+                <div className="flex-1">
+                  <p className="text-sm font-semibold">الإعدادات</p>
+                  <p className="text-xs opacity-80">إدارة التطبيق</p>
+                </div>
+              )}
+              {/* {sidebarOpen && (
+                <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+              )} */}
+            </div>
+          </Link>
+        </div>
+  )
 }
 
-
+export default SettingsButton

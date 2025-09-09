@@ -1,26 +1,42 @@
 import React, { useState } from "react";
-import { Home, BookOpen, ChevronLeft, ChevronDown, Settings, FileBarChart2 } from "lucide-react";
+import {
+  Home,
+  BookOpen,
+  Users,
+  GraduationCap,
+  Gift,
+  Clock,
+  ChevronLeft,
+  ChevronDown,
+  ChartBar,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useI18n } from "../../../context/translate-api";
+import { useI18n } from "@/context/translate-api";
 import SettingsButton from "./SettingsButton";
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const [expandedItems, setExpandedItems] = useState({});
   const { t, direction } = useI18n();
   const pathname = usePathname();
-  
+
   const navigationItems = [
-    { icon: Home, label: "لوحة التحكم", href: "/dashboard" },
+    { icon: Home, label: "dashbord", href: "/dashbord" },
+    { icon: BookOpen, label: "المستخدمين", href: "/users" },
+    { icon: Users, label: "طلبات الطلاب", href: "/dashboard/lessons/2" },
     {
-      icon: BookOpen,
-      label: "المزيد",
+      icon: GraduationCap,
+      label: "الفصول",
       hasSubmenu: true,
+      href: "",
       submenuItems: [
-        { icon: FileBarChart2, label: "التقارير", href: "/dashboard/reports" },
-        { icon: Settings, label: "الإعدادات", href: "/dashboard/settings" },
+        { label: "الفصل 1", href: "/usersrr" },
+        { label: "الفصل 2", href: "/dashboard/lessons/2" },
       ],
     },
+    { icon: Gift, label: "التجارب المجانية", href: "/dashboard/lessons/2" },
+    { icon: Clock, label: "أوقاتي", href: "/dashboard/lessons/2" },
+    { icon: ChartBar, label: "الإحصائيات", href: "/statistics" },
   ];
 
   const toggleSubmenu = (index) => {
@@ -32,7 +48,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
   const isActiveRoute = (href, submenuItems = null) => {
     if (href && pathname === href) return true;
-    if (submenuItems) return submenuItems.some(subItem => pathname === subItem.href);
+    if (submenuItems) {
+      return submenuItems.some((subItem) => pathname === subItem.href);
+    }
     return false;
   };
 
@@ -42,14 +60,18 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     <>
       <div
         id="sidebar"
-        className={`fixed inset-y-0 ${direction === "ltr" ? "left-0" : "right-0"} ${sidebarOpen ? "z-50" : "z-30"}  bg-white dark:bg-gray-800 shadow-xl transition-all duration-300 ease-in-out flex flex-col ${
+        className={`fixed inset-y-0 ${
+          direction === "ltr" ? "left-0" : "right-0"
+        } ${sidebarOpen ? "z-50" : "z-30"}  
+        bg-white dark:bg-gray-800 shadow-xl transition-all duration-300 ease-in-out flex flex-col ${
           sidebarOpen
             ? "w-64 translate-x-0"
             : direction === "ltr"
-              ? "w-16 -translate-x-full md:translate-x-0"
-              : "w-16 translate-x-full md:translate-x-0"
+            ? "w-16 -translate-x-full md:translate-x-0"
+            : "w-16 translate-x-full md:translate-x-0"
         }`}
       >
+        {/* Logo Section */}
         <div className="flex items-center justify-center h-16 px-4 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
           <div className="flex items-center justify-between w-full">
             <button
@@ -61,28 +83,33 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             {sidebarOpen && (
               <div className="transition-opacity duration-200 whitespace-nowrap flex-1 text-center">
                 <h1 className="text-lg font-bold text-gray-900 dark:text-white">
-                  إدارة النظام
+                  التاجر الرقمي
                 </h1>
               </div>
             )}
           </div>
         </div>
 
+        {/* Navigation */}
         <nav className="flex-1 overflow-y-auto mt-6 px-3 pb-4">
           <ul className="space-y-2">
             {navigationItems.map((item, index) => {
               const isActive = isActiveRoute(item.href, item.submenuItems);
-              
+
               return (
                 <li key={index}>
-                  <div
-                    className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-primary hover:text-white cursor-pointer ${
+                  {/* Link يغطي الـ li */}
+                  <Link
+                    href={item.href || "#"}
+                    className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-primary hover:text-white ${
                       isActive
                         ? "bg-primary text-white shadow-lg"
-                        : "text-gray-700 dark:text-gray-200 hover:text-white"
+                        : "text-gray-700 dark:text-gray-200"
                     }`}
-                    onClick={() =>
-                      item.hasSubmenu ? toggleSubmenu(index) : null
+                    onClick={(e) =>
+                      item.hasSubmenu
+                        ? (e.preventDefault(), toggleSubmenu(index))
+                        : null
                     }
                   >
                     <item.icon
@@ -91,14 +118,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                       } transition-all duration-200`}
                     />
 
-                    {sidebarOpen && (
-                      <Link href={item.href || "#"} className="whitespace-nowrap flex-1">
-                        {item.label}
-                      </Link>
-                    )}
+                    {sidebarOpen && <span>{item.label}</span>}
 
                     {sidebarOpen && item.hasSubmenu && (
-                      <div className="transition-transform duration-200">
+                      <div className="ml-auto transition-transform duration-200">
                         {expandedItems[index] ? (
                           <ChevronDown className="w-4 h-4" />
                         ) : (
@@ -106,13 +129,13 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                         )}
                       </div>
                     )}
-                  </div>
+                  </Link>
 
+                  {/* Submenu */}
                   {item.hasSubmenu && sidebarOpen && expandedItems[index] && (
                     <ul className="mt-2 space-y-1 ml-6">
                       {item.submenuItems?.map((subItem, subIndex) => {
                         const isSubActive = isActiveSubmenuItem(subItem.href);
-                        
                         return (
                           <li key={subIndex}>
                             <Link
@@ -123,9 +146,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                                   : "text-gray-600 dark:text-gray-300 hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-700"
                               }`}
                             >
-                              <span className={`w-2 h-2 rounded-full mr-3 flex-shrink-0 ${
-                                isSubActive ? "bg-primary" : "bg-gray-400"
-                              }`}></span>
+                              <span
+                                className={`w-2 h-2 rounded-full mr-3 flex-shrink-0 ${
+                                  isSubActive ? "bg-primary" : "bg-gray-400"
+                                }`}
+                              ></span>
                               {subItem.label}
                             </Link>
                           </li>
@@ -139,9 +164,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
           </ul>
         </nav>
 
+        {/* Settings */}
         <SettingsButton sidebarOpen={sidebarOpen} />
       </div>
 
+      {/* Overlay للموبايل */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black opacity-50 z-40 md:hidden"
@@ -153,5 +180,3 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 };
 
 export default Sidebar;
-
-

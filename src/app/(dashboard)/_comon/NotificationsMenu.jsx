@@ -8,9 +8,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../../../components/ui/dropdown-menu"
-import { Button } from "../../../components/ui/button" 
-
+} from "@/components/ui/dropdown-menu"
+import { Button } from "@/components/ui/button"
 
 export function NotificationsMenu() {
   return (
@@ -23,7 +22,7 @@ export function NotificationsMenu() {
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent align="end" className="w-72 ml-2">
+      <DropdownMenuContent align="" className="w-72 ml-2">
         <DropdownMenuLabel>الإشعارات</DropdownMenuLabel>
         <DropdownMenuSeparator />
 
@@ -47,5 +46,3 @@ export function NotificationsMenu() {
     </DropdownMenu>
   )
 }
-
-
