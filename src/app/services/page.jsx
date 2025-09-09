@@ -17,73 +17,52 @@ import {
 const servicesData = [
   {
     id: 1,
-    title: "الأرشيف",
-    description: "تخزين وتنظيم السجلات والوثائق",
-    icon: Archive,
+    title: "HRPanel",
+    description: "لوحة الموارد البشرية",
+    icon: Building2,
     isActive: true
   },
   {
     id: 2,
-    title: "الحسابات المالية",
-    description: "إدارة الحسابات والمعاملات المالية",
-    icon: CreditCard,
+    title: "CRMPanel",
+    description: "لوحة علاقات العملاء",
+    icon: UserCheck,
     isActive: true
   },
   {
     id: 3,
-    title: "إدارة المخازن",
-    description: "تتبع وإدارة المخزون بدقة",
-    icon: Package,
+    title: "FinancePanel",
+    description: "لوحة الحسابات المالية",
+    icon: CreditCard,
     isActive: true
   },
   {
     id: 4,
-    title: "نقاط البيع",
-    description: "إدارة المبيعات ونقاط البيع بكفاءة",
+    title: "POSPanel",
+    description: "لوحة نقاط البيع",
     icon: ShoppingCart,
     isActive: true
   },
   {
     id: 5,
-    title: "الإدارة العليا",
-    description: "إدارة شاملة لجميع العمليات والخدمات",
-    icon: Users,
+    title: "InventoryPanel",
+    description: "لوحة إدارة المخازن",
+    icon: Package,
     isActive: true
   },
   {
     id: 6,
-    title: "الاستيراد والتصدير",
-    description: "غير متاح حاليا - قيد التطوير",
-    icon: Globe,
-    isActive: false
+    title: "ManagementPanel",
+    description: "لوحة الإدارة",
+    icon: Users,
+    isActive: true
   },
   {
     id: 7,
-    title: "التوصيل والشحن",
-    description: "إدارة عمليات الشحن والتوصيل",
-    icon: Truck,
-    isActive: false
-  },
-  {
-    id: 8,
-    title: "إدارة العملاء",
-    description: "تتبع العملاء وتحسين العلاقات",
-    icon: UserCheck,
+    title: "Archive",
+    description: "الأرشيف",
+    icon: Archive,
     isActive: true
-  },
-  {
-    id: 9,
-    title: "الموارد البشرية",
-    description: "إدارة الموظفين والرواتب",
-    icon: Building2,
-    isActive: true
-  },
-  {
-    id: 10,
-    title: "الخزينة المالية",
-    description: "إدارة الخزائن والتدفقات النقدية",
-    icon: PiggyBank,
-    isActive: false
   }
 ]
 
@@ -99,29 +78,11 @@ const ServicesPage = () => {
           <div className="w-24 h-1 mx-auto rounded-full" style={{backgroundColor: '#81297f'}}></div>
         </div>
 
-        {/* First Row - 5 cards */}
-        <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-6">
-          {servicesData.slice(0, 5).map((service) => (
+        {/* Grid */}
+        <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-6">
+          {servicesData.map((service) => (
             <ServiceCard key={service.id} service={service} />
           ))}
-        </div>
-
-        {/* Second Row - 4 cards */}
-        <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-6 mt-6">
-          {/* Empty space for first column */}
-          <div className="lg:block md:hidden sm:hidden"></div>
-          
-          {/* 4 cards in the middle */}
-          {servicesData.slice(5, 9).map((service) => (
-            <ServiceCard key={service.id} service={service} />
-          ))}
-        </div>
-
-        {/* Third Row - 1 centered wider card */}
-        <div className="flex justify-center mt-6">
-          <div className="lg:w-2/5 md:w-2/3 sm:w-full">
-            <ServiceCard service={servicesData[9]} />
-          </div>
         </div>
       </div>
     </div>
@@ -134,6 +95,9 @@ const ServiceCard = ({ service }) => {
   return (
     <Card className="h-full hover:shadow-lg transition-shadow duration-300" style={{borderColor: '#e6e6e6'}}>
       <CardHeader className="text-center pb-3">
+        <div className="mx-auto mb-2 w-10 h-10 rounded-full flex items-center justify-center" style={{backgroundColor: '#f3e8f9'}}>
+          <IconComponent className="w-5 h-5" style={{color: '#81297f'}} />
+        </div>
         <CardTitle 
           className="text-lg font-semibold mb-2"
           style={{color: service.isActive ? '#81297f' : '#515151'}}

@@ -4,21 +4,21 @@ import { createContext, useContext, useMemo, useCallback, useState, useEffect } 
 
 import en from "../../public/locales/en";
 import ar from "../../public/locales/ar";
+import tr from "../../public/locales/tr";
 import Cookies from "js-cookie";
 
-const context = {
+const initialContext = {
     locale: "ar",
     t: ar,
     direction: "rtl",
-    changeLanguage: () => { },
+    changeLanguage: () => {},
 };
 
-const I18nContext = createContext(context);
+const I18nContext = createContext(initialContext);
 
-export const I18nProvider = ({ initialLocal = "ar", children } = {}) => {
-    const [locale, setLocale] = useState(initialLocal);
+export const I18nProvider = ({ initialLocale = "ar", children } = {}) => {
+    const [locale, setLocale] = useState(initialLocale);
 
-    // Sync with cookie on mount (client-side only)
     useEffect(() => {
         const cookieLang = Cookies.get('lang');
         if (cookieLang && cookieLang !== locale) {
@@ -33,8 +33,13 @@ export const I18nProvider = ({ initialLocal = "ar", children } = {}) => {
         document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
     }, []);
 
-    const t = useMemo(() => locale === "ar" ? ar : en, [locale]);
-    const direction = useMemo(() => locale === "ar" ? "rtl" : "ltr", [locale]);
+    const t = useMemo(() => {
+        if (locale === "ar") return ar;
+        if (locale === "tr") return tr;
+        return en;
+    }, [locale]);
+
+    const direction = useMemo(() => (locale === "ar" ? "rtl" : "ltr"), [locale]);
 
     return (
         <I18nContext.Provider value={{ locale, t, direction, changeLanguage }}>

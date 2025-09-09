@@ -2,10 +2,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
-// import { I18nProvider } from "@/context/translate-api";
 import { cookies, headers } from "next/headers";
 import { Montserrat , Cairo} from "next/font/google";
-import { I18nProvider } from "@/context/translate-api";
+import { I18nProvider } from "../context/translate-api";
 
 
 const montserrat = Montserrat({
@@ -61,7 +60,6 @@ export default async function RootLayout({ children }) {
       ? langCookie
       : defaultLocale;
   }
-  console.log(initialLocale)
 const dark = cookieStore.get("dark")?.value ?? "";  
   return (
     <html
@@ -73,13 +71,9 @@ const dark = cookieStore.get("dark")?.value ?? "";
       <body
         className={`${inter.className} ${geistSans.variable} ${geistMono.variable}`}
       >
-       
-          
-         <I18nProvider initialLocale={initialLocale}>
-      
+        <I18nProvider initialLocale={initialLocale}>
           {children}
         </I18nProvider>
-        
       </body>
     </html>
   );

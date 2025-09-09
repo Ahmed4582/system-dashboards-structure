@@ -1,50 +1,26 @@
 import React, { useState } from "react";
-import {
-  Home,
-  BookOpen,
-  Users,
-  GraduationCap,
-  Gift,
-  Clock,
-  ChevronLeft,
-  ChevronDown,
-  ChartBar,
-} from "lucide-react";
+import { Home, BookOpen, ChevronLeft, ChevronDown, Settings, FileBarChart2 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useI18n } from "@/context/translate-api";
+import { useI18n } from "../../../context/translate-api";
 import SettingsButton from "./SettingsButton";
 
-// Sidebar Component
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const [expandedItems, setExpandedItems] = useState({});
   const { t, direction } = useI18n();
   const pathname = usePathname();
   
-  // إزالة السطر: const dir = t === "ar" ? "rtl" : "ltr";
   const navigationItems = [
-    { icon: Home, label: "dashbord", href: "/dashbord" },
-    { icon: BookOpen, label: "المستخدمين", href: "/users" },
-    { icon: Users, label: "طلبات الطلاب", href: "/dashboard/lessons/2" },
+    { icon: Home, label: "لوحة التحكم", href: "/dashboard" },
     {
-      icon: GraduationCap,
-      label: "الفصول",
+      icon: BookOpen,
+      label: "المزيد",
       hasSubmenu: true,
-      href: "",
       submenuItems: [
-        {
-          label: "الفصل 1",
-          href: "/usersrr",
-        },
-        {
-          label: "الفصل 2",
-          href: "/dashboard/lessons/2",
-        },
+        { icon: FileBarChart2, label: "التقارير", href: "/dashboard/reports" },
+        { icon: Settings, label: "الإعدادات", href: "/dashboard/settings" },
       ],
     },
-    { icon: Gift, label: "التجارب المجانية", href: "/dashboard/lessons/2" },
-    { icon: Clock, label: "أوقاتي", href: "/dashboard/lessons/2" },
-    { icon: ChartBar, label: "الإحصائيات", href: "/statistics" },
   ];
 
   const toggleSubmenu = (index) => {
@@ -54,28 +30,16 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     }));
   };
 
-  // Function to check if a route is active
   const isActiveRoute = (href, submenuItems = null) => {
-    if (href && pathname === href) {
-      return true;
-    }
-    
-    // Check if any submenu item is active
-    if (submenuItems) {
-      return submenuItems.some(subItem => pathname === subItem.href);
-    }
-    
+    if (href && pathname === href) return true;
+    if (submenuItems) return submenuItems.some(subItem => pathname === subItem.href);
     return false;
   };
 
-  // Function to check if submenu item is active
-  const isActiveSubmenuItem = (href) => {
-    return pathname === href;
-  };
+  const isActiveSubmenuItem = (href) => pathname === href;
 
   return (
     <>
-      {/* Sidebar */}
       <div
         id="sidebar"
         className={`fixed inset-y-0 ${direction === "ltr" ? "left-0" : "right-0"} ${sidebarOpen ? "z-50" : "z-30"}  bg-white dark:bg-gray-800 shadow-xl transition-all duration-300 ease-in-out flex flex-col ${
@@ -86,7 +50,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               : "w-16 translate-x-full md:translate-x-0"
         }`}
       >
-        {/* Logo Section */}
         <div className="flex items-center justify-center h-16 px-4 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
           <div className="flex items-center justify-between w-full">
             <button
@@ -98,14 +61,13 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             {sidebarOpen && (
               <div className="transition-opacity duration-200 whitespace-nowrap flex-1 text-center">
                 <h1 className="text-lg font-bold text-gray-900 dark:text-white">
-                   التاجر الرقمي
+                  إدارة النظام
                 </h1>
               </div>
             )}
           </div>
         </div>
 
-        {/* Navigation - Scrollable Area */}
         <nav className="flex-1 overflow-y-auto mt-6 px-3 pb-4">
           <ul className="space-y-2">
             {navigationItems.map((item, index) => {
@@ -113,7 +75,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               
               return (
                 <li key={index}>
-                  {/* Main Navigation Item */}
                   <div
                     className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-primary hover:text-white cursor-pointer ${
                       isActive
@@ -147,7 +108,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     )}
                   </div>
 
-                  {/* Submenu Items */}
                   {item.hasSubmenu && sidebarOpen && expandedItems[index] && (
                     <ul className="mt-2 space-y-1 ml-6">
                       {item.submenuItems?.map((subItem, subIndex) => {
@@ -179,11 +139,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
           </ul>
         </nav>
 
-        {/* Settings Section - Fixed at Bottom */}
         <SettingsButton sidebarOpen={sidebarOpen} />
       </div>
 
-      {/* Mobile Overlay */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black opacity-50 z-40 md:hidden"
@@ -195,3 +153,5 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 };
 
 export default Sidebar;
+
+
